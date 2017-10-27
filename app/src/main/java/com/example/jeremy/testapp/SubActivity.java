@@ -23,6 +23,8 @@ public class SubActivity extends AppCompatActivity {
         subButton = (Button)findViewById(R.id.minusButton);
         countView = (TextView)findViewById(R.id.counterNumber);
 
+        int bob = 2;
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
