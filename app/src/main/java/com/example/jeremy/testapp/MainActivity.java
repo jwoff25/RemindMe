@@ -16,7 +16,15 @@ public class MainActivity extends AppCompatActivity {
         final Button counterButton = (Button)findViewById(R.id.second_button);
         counterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                Intent i = new Intent(getApplicationContext(), SubActivity.class);
+                Intent i = new Intent(getApplicationContext(), UpDownCounter.class);
+                startActivity(i);
+            }
+        });
+
+        final Button countdownButton = (Button)findViewById(R.id.countd_button);
+        counterButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent i = new Intent(getApplicationContext(), CountdownCounter.class);
                 startActivity(i);
             }
         });

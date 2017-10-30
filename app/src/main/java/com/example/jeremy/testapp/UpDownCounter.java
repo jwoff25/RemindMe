@@ -17,7 +17,7 @@ import static android.R.id.message;
  * Created by Jeremy on 10/13/2017.
  */
 
-public class SubActivity extends AppCompatActivity {
+public class UpDownCounter extends AppCompatActivity {
     //FIELD VARIABLES
     Button addButton;
     Button subButton;
