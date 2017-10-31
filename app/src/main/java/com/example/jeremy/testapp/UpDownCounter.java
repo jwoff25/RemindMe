@@ -58,16 +58,20 @@ public class UpDownCounter extends AppCompatActivity {
 
     //SUBTRACT
     public void subtract(){
-        int count = Integer.parseInt(countView.getText().toString());
-        count--;
-        countView.setText(String.valueOf(count));
+        if (!countView.getText().equals("-")) {
+            int count = Integer.parseInt(countView.getText().toString());
+            count--;
+            countView.setText(String.valueOf(count));
+        }
     }
 
     //ADD
     public void add(){
-        int count = Integer.parseInt(countView.getText().toString());
-        count++;
-        countView.setText(String.valueOf(count));
+        if (!countView.getText().equals("-")) {
+            int count = Integer.parseInt(countView.getText().toString());
+            count++;
+            countView.setText(String.valueOf(count));
+        }
     }
 
     //ONLY WORKS ONCE LOL

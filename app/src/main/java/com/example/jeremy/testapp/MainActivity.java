@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Button countdownButton = (Button)findViewById(R.id.countd_button);
-        counterButton.setOnClickListener(new View.OnClickListener() {
+        countdownButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent i = new Intent(getApplicationContext(), CountdownCounter.class);
                 startActivity(i);
