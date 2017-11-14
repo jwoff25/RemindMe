@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ public class UpDownCounter extends AppCompatActivity {
         setContentView(R.layout.second_activity);
 
         input = new EditText(getApplicationContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         addButton = (Button)findViewById(R.id.addButton);
         subButton = (Button)findViewById(R.id.minusButton);
@@ -76,19 +80,34 @@ public class UpDownCounter extends AppCompatActivity {
 
     //ONLY WORKS ONCE LOL
     public void openDialog(){
-       AlertDialog alert = new AlertDialog.Builder(this)
+        final AlertDialog.Builder alert_builder = new AlertDialog.Builder(this)
                 .setTitle("Update Counter")
                 .setMessage("Set value of counter.")
-                .setView(input)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String value = input.getText().toString();
                         countView.setText(value);
+                        dialog.dismiss();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Do nothing.
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        if (input.getParent()!=null){
+            ((ViewGroup)input.getParent()).removeView(input);
+            input.setText(null);
+        }
+        alert_builder.setView(input);
+        final AlertDialog alert = alert_builder.create();
+        input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
             }
-        }).show();
+        });
+        alert.show();
     }
 }
