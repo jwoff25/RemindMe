@@ -24,5 +24,6 @@ public class MoneyManager extends AppCompatActivity {
         container.addView(log);
 
         debit = (Button)findViewById(R.id.debitButton);
+        credit = (Button)findViewById(R.id.creditButton);
     }
 }
