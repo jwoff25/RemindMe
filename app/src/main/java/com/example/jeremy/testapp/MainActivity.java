@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //up down counter
         final Button counterButton = (Button)findViewById(R.id.second_button);
         counterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -21,10 +22,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //one by one counter
         final Button countdownButton = (Button)findViewById(R.id.countd_button);
         countdownButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent i = new Intent(getApplicationContext(), CountdownCounter.class);
+                startActivity(i);
+            }
+        });
+
+        //bank counter
+        final Button bankButton = (Button)findViewById(R.id.finance_button);
+        bankButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent i = new Intent(getApplicationContext(), MoneyManager.class);
                 startActivity(i);
             }
         });

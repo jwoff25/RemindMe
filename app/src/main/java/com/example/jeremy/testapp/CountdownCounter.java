@@ -53,6 +53,7 @@ public class CountdownCounter extends AppCompatActivity {
         countText.setText(String.valueOf(val));
     }
 
+
     public void openDialog(){
         final AlertDialog.Builder alert_builder = new AlertDialog.Builder(this)
                 .setTitle("Update Counter")
