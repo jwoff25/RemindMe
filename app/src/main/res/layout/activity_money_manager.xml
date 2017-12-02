@@ -57,7 +57,7 @@
         app:layout_constraintVertical_bias="0.206" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/setCash"
         android:layout_width="349dp"
         android:layout_height="238dp"
         android:background="@drawable/back"

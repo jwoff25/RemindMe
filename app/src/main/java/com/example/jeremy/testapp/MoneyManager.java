@@ -25,5 +25,6 @@ public class MoneyManager extends AppCompatActivity {
 
         debit = (Button)findViewById(R.id.debitButton);
         credit = (Button)findViewById(R.id.creditButton);
+        setCash = (Button)findViewById(R.id.moneyButton);
     }
 }
