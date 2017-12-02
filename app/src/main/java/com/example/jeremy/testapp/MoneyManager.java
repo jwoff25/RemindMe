@@ -22,5 +22,7 @@ public class MoneyManager extends AppCompatActivity {
         container = new ScrollView(getApplicationContext());
         log.setText(R.string.default_log);
         container.addView(log);
+
+        debit = (Button)findViewById(R.id.debitButton);
     }
 }
