@@ -109,19 +109,26 @@ public class MoneyManager extends AppCompatActivity {
                 .setMessage("How much would you like to add?")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        float debit_amount = Float.parseFloat(input.getText().toString());
-                        float value = Float.parseFloat(prefs.getString("Cash", "00.00"));
-                        String before = String.format(Locale.getDefault(),"%.02f", value);
-                        Log.d("nullcheck", "am i null?");
-                        float new_total = value + debit_amount;
-                        prefs_editor = prefs.edit();
-                        prefs_editor.putString("Cash", String.valueOf(new_total));
-                        prefs_editor.apply();
-                        String after = String.format(Locale.getDefault(),"%.02f", new_total);
-                        String final_text = "$" + String.format(Locale.getDefault(),"%.02f", Float.parseFloat(prefs.getString("Cash", "00.00"))); //format to two decimal points
-                        cashText.setText(final_text);
-                        writeToLog("Debit: $" + String.format(Locale.getDefault(),"%.02f", debit_amount) + ", Before: $" + before + ", After: $" + after);
-                        dialog.dismiss();
+                        if (!input.getText().toString().equals("")) {
+                            float debit_amount = Float.parseFloat(input.getText().toString());
+                            float value = Float.parseFloat(prefs.getString("Cash", "00.00"));
+                            String before = String.format(Locale.getDefault(), "%.02f", value);
+                            Log.d("nullcheck", "am i null?");
+                            float new_total = value + debit_amount;
+                            prefs_editor = prefs.edit();
+                            prefs_editor.putString("Cash", String.valueOf(new_total));
+                            prefs_editor.apply();
+                            String after = String.format(Locale.getDefault(), "%.02f", new_total);
+                            String final_text = "$" + String.format(Locale.getDefault(), "%.02f", Float.parseFloat(prefs.getString("Cash", "00.00"))); //format to two decimal points
+                            cashText.setText(final_text);
+                            writeToLog("Debit: $" + String.format(Locale.getDefault(), "%.02f", debit_amount) + ", Before: $" + before + ", After: $" + after);
+                            dialog.dismiss();
+                        } else { //add a serious message dude
+                            Log.d("cmon man", "hands up");
+                            //Toast t = new Toast(context);
+                            //t.makeText()
+                            //t.show();
+                        }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -146,7 +153,48 @@ public class MoneyManager extends AppCompatActivity {
     }
 
     public void do_credit(){
-
+        final AlertDialog.Builder alert_builder = new AlertDialog.Builder(this)
+                .setTitle("")
+                .setMessage("How much would you like to subtract?")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if (!input.getText().toString().equals("")) {
+                            float credit_amount = Float.parseFloat(input.getText().toString());
+                            float value = Float.parseFloat(prefs.getString("Cash", "00.00"));
+                            String before = String.format(Locale.getDefault(), "%.02f", value);
+                            float new_total = value - credit_amount;
+                            prefs_editor = prefs.edit();
+                            prefs_editor.putString("Cash", String.valueOf(new_total));
+                            prefs_editor.apply();
+                            String after = String.format(Locale.getDefault(), "%.02f", new_total);
+                            String final_text = "$" + String.format(Locale.getDefault(), "%.02f", Float.parseFloat(prefs.getString("Cash", "00.00"))); //format to two decimal points
+                            cashText.setText(final_text);
+                            writeToLog("Credit: $" + String.format(Locale.getDefault(), "%.02f", credit_amount) + ", Before: $" + before + ", After: $" + after);
+                            dialog.dismiss();
+                        } else {
+                            Log.d("no way", "jose man");
+                        }
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        if (input.getParent()!=null){
+            ((ViewGroup)input.getParent()).removeView(input);
+            input.setText(null);
+        }
+        alert_builder.setView(input);
+        final AlertDialog alert = alert_builder.create();
+        input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+            }
+        });
+        alert.show();
     }
 
     public void openDialog(){
